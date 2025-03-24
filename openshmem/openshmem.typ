@@ -37,13 +37,14 @@ What do we need for explicit RDMA Read / Write?
 
 - PGAS: Partitioned Global Address Space
   - All process share same memory space (that needs to be shared).
+  - `shmalloc` / `shfree` (Shared Memory Allocation / Free)
 - SPMD (single program, multiple data)
   - The SHMEM processes, called processing elements or #text(weight: "bold")[PE]s, all start at the same time and they all run the same program.
 - Get/Put Operation
   - `shmem_get` / `shmem_put`
   - `shmem_get_nbi` / `shmem_put_nbi` (Non-blocking)
 - Synchrnoization Primitive (similar to Multi-threading Programming)
-  - Barrier
+  - Barrier ()
   - Wait
   - Fence / Quiet
   - Lock
