@@ -60,14 +60,12 @@ What do we need for explicit RDMA Read / Write?
         const int SIZE = 10;
         int local[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         int shared[SIZE] = {0};
-        // Processing element (PE) 1 is the target.
-        int target_pe = 1;
+        int target_pe = 1; // Processing element (PE) 1 is the target.
         if (shmem_my_pe == 0){
             // Perform the put operation: copy 'local' array to 'shared' array at target PE.
             shmem_int_put_nbi(shared, local, SIZE, target_pe);
         }
-        // Synchronize all processing elements to ensure the put operation completes.
-        shmem_barrier_all();
+        shmem_barrier_all(); // Synchronize all processing elements to ensure the put operation completes.
         if (shmem_my_pe() == target_pe) {
             printf("Data received on PE %d:\n", shmem_my_pe());
             for (int i = 0; i < SIZE; i++) {
