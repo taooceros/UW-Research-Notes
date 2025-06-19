@@ -1,0 +1,31 @@
+flowchart TD
+    subgraph c1[Cluters 1]
+        CPU1[CPU]
+        GPU1[GPU]
+        sv[Small Vector DB]
+
+        CPU1 -- Retrieve --> sv
+        sv -- Result --> GPU1
+    end
+
+    subgraph c2[Vector DB]
+        Memory1[Big Memory]
+    end
+
+    subgraph c3[Vector DB]
+        Memory2[Big Memory]
+    end
+
+    subgraph c4[Vector DB]
+        Memory3[Big Memory]
+    end
+
+    CPU1 -- Retrieve --> c2
+    CPU1 -- Retrieve --> c3
+    CPU1 -- Retrieve --> c4
+
+    c2 -- Result --> GPU1
+    c3 -- Result --> GPU1
+    c4 -- Result --> GPU1
+
+

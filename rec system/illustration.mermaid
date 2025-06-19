@@ -1,0 +1,28 @@
+flowchart TD
+    
+    subgraph Memory Cluster
+        subgraph SmartNIC1
+            CXL1[CXL]
+        end
+        subgraph SmartNIC2
+            CXL2[CXL]
+        end
+    end
+
+    subgraph GPU Cluster
+        GPU1[GPU]
+        GPU2[GPU]
+    end
+
+    GPU1 --
+    RDMA Read 
+    (ibgda, scatter gather)
+    --> CXL1
+
+    subgraph CPU Cluster
+        CPU1[CPU]
+        CPU2[CPU]
+    end
+
+    CPU1 -- issue --> GPU1
+    GPU1 -- response --> CPU1

@@ -11,11 +11,11 @@
   footer: self => self.info.institution,
   navigation: "mini-slides",
   config-info(
-    title: [Title],
-    subtitle: [Subtitle],
-    author: [Authors],
+    title: [OpenSHMEM],
+    subtitle: none,
+    author: none,
     date: datetime.today(),
-    institution: [Institution],
+    institution: none,
   ),
 )
 
@@ -23,12 +23,16 @@
 #set text(size: 18pt)
 #show raw.where(block: true): set text(10pt)
 
+#title-slide()
+
 = OpenShmem
 
 == RDMA Model
 
 What do we need for explicit RDMA Read / Write?
 
+- Setup Queue Pair (QP) / Connection
+- Register Memory Region (MR)
 - Exchange Address
 - Exchange Memory Key
 - Handling Async Operation (send queue / poll completion queue)
@@ -98,8 +102,14 @@ What do we need for explicit RDMA Read / Write?
 
 == Overview
 
-#figure(caption: [OpenSHMEM Illustration])[
-  #image(height: 80%, "images/OpenShmem-Illustration.svg", alt: "OpenSHMEM Illustration")
+#grid(columns: (30%, 70%))[
+  RVA: Remote Virtual Address
+  
+  Rkey: Remote Key
+][
+  #figure(caption: [OpenSHMEM Illustration])[
+    #image(height: 80%, "images/OpenShmem-Illustration.svg", alt: "OpenSHMEM Illustration")
+  ]
 ]
 
 == Entry Point (e.g. `shmem_int_put_nbi`)

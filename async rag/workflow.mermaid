@@ -1,0 +1,28 @@
+sequenceDiagram
+    autonumber
+    box Cluster 1
+        participant CPU1
+        participant GPU1
+        participant sv as Small Vector DB
+    end
+
+    box Cluster 2
+        participant bv as Big Vector DB
+    end
+
+    par Retrieve
+        CPU1-->>+sv: 
+        CPU1-->>+bv: 
+    end
+    sv->>-GPU1: Result (ibgdr?)
+
+    loop Chunk Prefill
+        GPU1->>GPU1: 
+    end
+    bv->>-GPU1: Result (ibgdr?)
+
+    loop Chunk Prefill
+        GPU1->>GPU1: 
+    end
+
+    GPU1->>CPU1: Result
